@@ -26,6 +26,29 @@
       </button>
     </div>
     <p class="error">{{ error }}</p>
+    <label>
+      <input type="checkbox" v-model="checked" />
+      Отобразить экранную клавиатуру
+    </label>
+    <div class="keyboard" v-show="checked">
+      <button
+        v-for="(number, idx) in keyboard"
+        :key="idx"
+        v-html="number"
+        @click="setValue"
+        class="btn"
+      ></button>
+      <div>
+        <label>
+          <input type="radio" name="operand" value="op1" v-model="checkedOp" />
+          Первый операнд
+        </label>
+        <label>
+          <input type="radio" name="operand" value="op2" v-model="checkedOp" />
+          Второй операнд
+        </label>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,6 +63,7 @@ export default {
       result: 0,
       error: "",
       operands: ["+", "-", "/", "*", "x^y", "%"],
+      keyboard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "&larr;"],
       checked: false,
     };
   },
@@ -94,6 +118,26 @@ export default {
     focusOperand(e) {
       if (e.target.value === "op1") {
         this.$els.inputOp1.focus();
+      }
+    },
+    setValue(e) {
+      switch (this.checkedOp) {
+        case "op1":
+          {
+            if (e.target.textContent === "←") {
+              const str = this.op1.toString();
+              this.op1 = str.slice(0, str.length - 1);
+            } else this.op1 = +(this.op1 + e.target.textContent);
+          }
+          break;
+        case "op2":
+          {
+            if (e.target.textContent === "←") {
+              const str = this.op2.toString();
+              this.op2 = str.slice(0, str.length - 1);
+            } else this.op2 = +(this.op2 + e.target.textContent);
+          }
+          break;
       }
     },
   },
