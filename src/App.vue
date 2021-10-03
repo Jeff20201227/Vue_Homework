@@ -1,20 +1,12 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <Calculator />
+    <div id="nav">
+      <router-link to="/">Главная</router-link> |
+      <router-link to="/about">О сайте</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
-
-<script>
-import Calculator from "./components/Calculator.vue";
-
-export default {
-  name: "App",
-  components: {
-    Calculator,
-  },
-};
-</script>
 
 <style lang="scss">
 #app {
@@ -23,8 +15,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  background-color: aquamarine;
-  border: 2px solid black;
+}
+
+#nav {
+  padding: 10px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
