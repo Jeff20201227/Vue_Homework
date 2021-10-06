@@ -1,16 +1,16 @@
 <template>
   <Layout>
-    <h1>Финансовый Помощник</h1>
-    <AddPaymentForm @addNewPayment="addNewPayment" />
-    <PaymentsDisplay :items="paymentList" />
+    <h1 class="heading">Финансовый Помощник</h1>
+    <AddPaymentForm />
+    <PaymentsDisplay />
   </Layout>
 </template>
 
 <script>
-// @ is an alias to /src
 import PaymentsDisplay from "@/components/entity/PaymentsDisplay";
 import AddPaymentForm from "@/components/entity/AddPaymentForm";
 import Layout from "@/components/Layout";
+import { mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -19,21 +19,15 @@ export default {
     AddPaymentForm,
     Layout,
   },
-  data() {
-    return {
-      paymentList: [],
-    };
-  },
   methods: {
-    fetchData() {
-      return [];
-    },
-    addNewPayment(data) {
-      this.paymentList = [...this.paymentList, data];
-    },
+    ...mapActions({
+      fetchListData: "fetchData",
+    }),
   },
   created() {
-    this.paymentList = this.fetchData();
+    this.fetchListData("page1");
   },
 };
 </script>
+
+<style scoped lang="scss"></style>
