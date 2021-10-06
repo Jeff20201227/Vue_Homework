@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <p><strong>Total Costs:</strong> {{ getTotalCosts }}$</p>
+    <p><strong>Общая сумма:</strong> {{ getTotalCosts }}$</p>
     <div class="payment table-header">
       <p>#</p>
       <p>Дата</p>

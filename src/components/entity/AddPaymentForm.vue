@@ -9,7 +9,7 @@
     />
     <div v-show="show" class="form">
       <label>
-        Payment Discription
+        Категория трат
         <select class="select" v-model="type">
           <option
             v-for="(option, idx) in getCategoriesList"
@@ -85,11 +85,7 @@ export default {
         const data = {
           amount: +this.amount,
           category: this.type,
-          date:
-            this.date
-              .split("-")
-              .reverse()
-              .join("/") || this.getCurrentDate,
+          date: this.date.split("-").reverse().join("/") || this.getCurrentDate,
         };
         this.addPayment(data);
       } else this.error = true;

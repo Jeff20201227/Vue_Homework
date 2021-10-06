@@ -53,29 +53,29 @@ export default new Vuex.Store({
         setTimeout(() => {
           resolve({
             page1: [
-              { id: 1, date: "28/03/2020", category: "Food", amount: 169 },
-              { id: 2, date: "24/03/2020", category: "Transport", amount: 569 },
-              { id: 3, date: "21/03/2020", category: "Home", amount: 532 },
+              { id: 1, date: "28/07/2021", category: "Книги", amount: 169 },
+              { id: 2, date: "24/07/2021", category: "Метро", amount: 569 },
+              { id: 3, date: "21/07/2021", category: "Еда", amount: 532 },
             ],
             page2: [
               {
                 id: 4,
-                date: "28/03/2020",
-                category: "Entertaiment",
+                date: "28/07/2021",
+                category: "Развлечения",
                 amount: 541,
               },
-              { id: 5, date: "24/03/2020", category: "Education", amount: 75 },
-              { id: 6, date: "21/03/2020", category: "Sport", amount: 854 },
+              { id: 5, date: "24/07/2021", category: "Мороженное", amount: 75 },
+              { id: 6, date: "21/07/2021", category: "Туризм", amount: 854 },
             ],
             page3: [
               {
                 id: 7,
-                date: "28/03/2020",
-                category: "Navigation",
+                date: "28/07/2021",
+                category: "Музеи",
                 amount: 456,
               },
-              { id: 8, date: "24/03/2020", category: "Books", amount: 586 },
-              { id: 9, date: "21/03/2020", category: "Boyfriend", amount: 258 },
+              { id: 8, date: "24/07/2021", category: "Книги", amount: 586 },
+              { id: 9, date: "21/07/2021", category: "Друзья", amount: 258 },
             ],
             totalPages: 3,
             totalCosts: 4040,
@@ -91,7 +91,7 @@ export default new Vuex.Store({
     loadCategories({ commit }) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(["Food", "Transport", "Education", "Entertainment"]);
+          resolve(["Еда", "Транспорт", "Образование", "Развлечения"]);
         }, 1000);
       }).then((res) => {
         commit("setCategories", res);
