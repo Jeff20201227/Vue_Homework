@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1 class="heading">Мой финансовый помощник</h1>
+    <h1 class="heading">My Finance</h1>
     <AddPaymentForm />
     <PaymentsDisplay />
   </Layout>

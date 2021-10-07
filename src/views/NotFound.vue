@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>Ошибка №: 404</h1>
+    <h1>??????: 404</h1>
   </Layout>
 </template>
 

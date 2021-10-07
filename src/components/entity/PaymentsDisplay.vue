@@ -1,10 +1,12 @@
 <template>
   <div class="content">
     <div class="links">
-      <a class="regular" href="/add/Food?value=200">Add Food = 200$</a>
-      <a class="regular" href="/add/Transport?value=50">Add Transport = 50$</a>
+      <a class="regular" href="/add/Food?value=200">Добавить Еды = 200$</a>
+      <a class="regular" href="/add/Transport?value=50"
+        >Добавить Транспорт = 50$</a
+      >
       <a class="regular" href="/add/Entertainment?value=2000"
-        >Add Entertainment = 2000$</a
+        >Добавить Развлечения = 2000$</a
       >
     </div>
     <p>
