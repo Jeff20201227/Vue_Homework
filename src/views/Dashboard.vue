@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1 class="heading">Р¤РёРЅР°РЅСЃРѕРІС‹Р№ РџРѕРјРѕС‰РЅРёРє</h1>
+    <h1 class="heading">Мой финансовый помощник</h1>
     <AddPaymentForm />
     <PaymentsDisplay />
   </Layout>
@@ -13,7 +13,7 @@ import Layout from "@/components/Layout";
 import { mapActions } from "vuex";
 
 export default {
-  name: "Home",
+  name: "Dashboard",
   components: {
     PaymentsDisplay,
     AddPaymentForm,

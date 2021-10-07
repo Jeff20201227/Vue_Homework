@@ -53,9 +53,9 @@ export default new Vuex.Store({
         setTimeout(() => {
           resolve({
             page1: [
-              { id: 1, date: "28/07/2021", category: "Книги", amount: 169 },
-              { id: 2, date: "24/07/2021", category: "Метро", amount: 569 },
-              { id: 3, date: "21/07/2021", category: "Еда", amount: 532 },
+              { id: 1, date: "28/07/2021", category: "Транспорт", amount: 169 },
+              { id: 2, date: "24/07/2021", category: "Еда", amount: 569 },
+              { id: 3, date: "21/07/2021", category: "Дом", amount: 532 },
             ],
             page2: [
               {
@@ -64,8 +64,8 @@ export default new Vuex.Store({
                 category: "Развлечения",
                 amount: 541,
               },
-              { id: 5, date: "24/07/2021", category: "Мороженное", amount: 75 },
-              { id: 6, date: "21/07/2021", category: "Туризм", amount: 854 },
+              { id: 5, date: "24/07/2021", category: "Развлечения", amount: 75 },
+              { id: 6, date: "21/07/2021", category: "Спорт", amount: 854 },
             ],
             page3: [
               {

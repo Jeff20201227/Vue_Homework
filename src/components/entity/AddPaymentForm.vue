@@ -10,7 +10,8 @@
     <div v-show="show" class="form">
       <label>
         Категория трат
-        <select class="select" v-model="type">
+        <input class="select" type="text" list="category" v-model="type" />
+        <datalist id="category">
           <option
             v-for="(option, idx) in getCategoriesList"
             :value="option"
@@ -18,7 +19,7 @@
           >
             {{ option }}
           </option>
-        </select>
+        </datalist>
       </label>
       <Input type="number" v-model="amount" label="Цена, $" />
       <Input type="date" v-model="date" label="Дата оплаты" />
@@ -85,7 +86,11 @@ export default {
         const data = {
           amount: +this.amount,
           category: this.type,
-          date: this.date.split("-").reverse().join("/") || this.getCurrentDate,
+          date:
+            this.date
+              .split("-")
+              .reverse()
+              .join("/") || this.getCurrentDate,
         };
         this.addPayment(data);
       } else this.error = true;
@@ -101,6 +106,13 @@ export default {
   mounted() {
     if (!this.getCategoriesList.length) {
       this.fetchCategories();
+    }
+  },
+  created() {
+    if (this.$route.path.split("/")[1] === "add") {
+      this.type = this.$route.params.category || "";
+      this.amount = +this.$route.query.value || "";
+      this.show = true;
     }
   },
 };

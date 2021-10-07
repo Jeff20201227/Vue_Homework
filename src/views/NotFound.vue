@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>–ö—É—Ä—Å –ø–æ Vue</h1>
+    <h1>Œ¯Ë·Í‡ π: 404</h1>
   </Layout>
 </template>
 
@@ -8,7 +8,7 @@
 import Layout from "@/components/Layout";
 
 export default {
-  name: "About",
+  name: "NotFound",
   components: {
     Layout,
   },

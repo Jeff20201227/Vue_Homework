@@ -1,13 +1,22 @@
 <template>
   <div class="content">
-    <p><strong>Общая сумма:</strong> {{ getTotalCosts }}$</p>
+    <div class="links">
+      <a class="regular" href="/add/Food?value=200">Add Food = 200$</a>
+      <a class="regular" href="/add/Transport?value=50">Add Transport = 50$</a>
+      <a class="regular" href="/add/Entertainment?value=2000"
+        >Add Entertainment = 2000$</a
+      >
+    </div>
+    <p>
+      <strong style="color: #008b8b">Общая сумма:</strong> {{ getTotalCosts }}$
+    </p>
     <div class="payment table-header">
       <p>#</p>
       <p>Дата</p>
       <p>Категория</p>
       <p>Цена</p>
     </div>
-    <p v-if="this.isLoading">...Loading</p>
+    <p v-if="this.isLoading">...Загружается</p>
     <div v-if="!this.isLoading">
       <div class="payment" v-for="(item, idx) in paymentsList" :key="idx">
         <p>{{ item.id }}</p>
@@ -50,7 +59,7 @@ export default {
     }),
     handleChangePage(e) {
       const page = `${"page" + e.target.textContent}`.split(" ").join("");
-      console.log(page);
+
       this.fetchListData(page);
     },
   },
@@ -83,6 +92,15 @@ export default {
     border: none;
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+  }
+}
+.regular {
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin: 10px 0;
+  &:hover {
+    color: #008b8b;
   }
 }
 </style>
