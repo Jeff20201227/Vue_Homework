@@ -1,13 +1,6 @@
 <template>
-  <div class="content">
-    <Button
-      icon
-      width="300px"
-      text="Добавить покупку"
-      @onClick="show = !show"
-      v-show="!show"
-    />
-    <div v-show="show" class="form">
+  <div class="contentPaymentForm">
+    <div class="form">
       <label>
         Категория трат
         <input class="select" type="text" list="category" v-model="type" />
@@ -23,21 +16,21 @@
       </label>
       <Input type="number" v-model="amount" label="Цена, $" />
       <Input type="date" v-model="date" label="Дата оплаты" />
-      <div class="btns">
-        <Button
-          class="btn"
-          width="145px"
-          text="Отмена"
-          @onClick="onClickCloseForm"
-        />
-        <Button
-          icon
-          class="btn"
-          width="145px"
-          text="Добавить"
-          @onClick="onClickAddCost"
-        />
-      </div>
+      <Button
+        icon
+        v-if="!Object.keys(this.getEditItem).length"
+        class="btn"
+        width="100%"
+        title="Add"
+        @onClick="onClickAddCost"
+      />
+      <Button
+        v-if="Object.keys(this.getEditItem).length"
+        class="btn"
+        width="100%"
+        title="Edit"
+        @onClick="onClickEditCost"
+      />
       <ErrorMessage v-show="error" text="Надо заполнить все поля" />
     </div>
   </div>
@@ -50,6 +43,7 @@ import ErrorMessage from "@/components/ui/ErrorMessage";
 import { mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
+  name: "AddPaymentForm",
   components: {
     Button,
     Input,
@@ -61,12 +55,11 @@ export default {
       type: "",
       date: "",
       id: "",
-      show: false,
       error: false,
     };
   },
   computed: {
-    ...mapGetters(["getCategoriesList"]),
+    ...mapGetters(["getCategoriesList", "getEditItem"]),
     getCurrentDate() {
       const today = new Date();
       const day = today.getDate();
@@ -78,8 +71,13 @@ export default {
   methods: {
     ...mapMutations({
       addPayment: "addDataToPaymentsList",
+      clearEditItem: "clearEditItem",
     }),
-    ...mapActions({ fetchCategories: "loadCategories" }),
+    ...mapActions({
+      fetchCategories: "loadCategories",
+      addNewPayment: "addPayment",
+      editPayment: "editPayment",
+    }),
     onClickAddCost() {
       if (this.amount && this.type) {
         this.error = false;
@@ -92,37 +90,50 @@ export default {
               .reverse()
               .join("/") || this.getCurrentDate,
         };
-        this.addPayment(data);
+        // this.addPayment(data);
+        this.addNewPayment(data);
+        this.$modal.hide();
       } else this.error = true;
     },
-    onClickCloseForm() {
-      this.error = false;
-      this.amount = "";
-      this.type = "";
-      this.date = "";
-      this.show = false;
+    onClickEditCost() {
+      const editedItem = {
+        id: this.getEditItem.id,
+        amount: +this.amount,
+        category: this.type,
+        date:
+          this.date
+            .split("-")
+            .reverse()
+            .join("/") || this.getCurrentDate,
+      };
+      this.editPayment(editedItem);
+      this.$modal.hide();
+      this.clearEditItem();
     },
   },
   mounted() {
     if (!this.getCategoriesList.length) {
       this.fetchCategories();
     }
+    if (Object.keys(this.getEditItem).length) {
+      console.log(this.getEditItem);
+      this.amount = this.getEditItem.amount.toString();
+      this.type = this.getEditItem.category;
+    }
   },
   created() {
     if (this.$route.path.split("/")[1] === "add") {
       this.type = this.$route.params.category || "";
-      this.amount = +this.$route.query.value || "";
-      this.show = true;
+      this.amount = this.$route.query.value || "";
     }
   },
 };
 </script>
 
 <style scoped lang="scss">
-.content {
+.contentPaymentForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .form {
   display: flex;
@@ -130,11 +141,7 @@ export default {
   align-items: center;
   width: 300px;
 }
-.btns {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
+
 .select {
   margin: 15px 0;
   padding: 10px;
