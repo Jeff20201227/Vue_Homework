@@ -21,14 +21,14 @@
         v-if="!Object.keys(this.getEditItem).length"
         class="btn"
         width="100%"
-        title="Add"
+        title="Добавить"
         @onClick="onClickAddCost"
       />
       <Button
         v-if="Object.keys(this.getEditItem).length"
         class="btn"
         width="100%"
-        title="Edit"
+        title="Редактировать"
         @onClick="onClickEditCost"
       />
       <ErrorMessage v-show="error" text="Надо заполнить все поля" />

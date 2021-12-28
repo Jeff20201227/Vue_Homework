@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <h1 class="heading">Мои финансы</h1>
-    <Button title="Add Payment" @onClick="openModalPayment" width="300px" />
+    <Button title="Добавить Платеж" @onClick="openModalPayment" width="300px" />
     <PaymentsDisplay />
   </Layout>
 </template>
@@ -25,7 +25,7 @@ export default {
     }),
     openModalPayment() {
       this.$modal.show({
-        title: "Add Payment Form",
+        title: "Добавить форму платежа",
         content: "AddPaymentForm",
       });
     },
@@ -34,7 +34,7 @@ export default {
     this.fetchPaymentList(1);
     if (this.$route.path.split("/")[1] === "add") {
       this.$modal.show({
-        title: "Add Payment Form",
+        title: "Добавить форму платежа",
         content: "AddPaymentForm",
       });
     }

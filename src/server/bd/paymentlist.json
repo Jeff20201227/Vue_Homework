@@ -3,49 +3,49 @@
         {
             "id": 1,
             "date": "13/10/2021",
-            "category": "Boyfriend",
+            "category": "Друзья",
             "amount": 268
         },
         {
             "id": 2,
             "amount": 15,
-            "category": "Transport",
+            "category": "Транспорт",
             "date": "11/10/2021"
         },
         {
             "id": 3,
             "date": "13/10/2021",
-            "category": "Home",
+            "category": "Дом",
             "amount": 43
         },
         {
             "id": 4,
             "date": "13/10/2021",
-            "category": "Nails",
+            "category": "Маникюр",
             "amount": 54
         },
         {
             "id": 5,
             "date": "24/03/2020",
-            "category": "Education",
+            "category": "Развлечения",
             "amount": 75
         },
         {
             "id": 6,
             "date": "21/03/2020",
-            "category": "Sport",
+            "category": "Спорт",
             "amount": 854
         },
         {
             "id": 7,
             "date": "28/03/2020",
-            "category": "Navigation",
+            "category": "Навигация",
             "amount": 456
         },
         {
             "id": 8,
             "date": "24/03/2020",
-            "category": "Books",
+            "category": "Книги",
             "amount": 586
         },
         {
@@ -57,25 +57,25 @@
         {
             "id": 10,
             "date": "28/03/2020",
-            "category": "Food",
+            "category": "Еда",
             "amount": 169
         },
         {
             "id": 11,
             "date": "24/03/2020",
-            "category": "Transport",
+            "category": "Транспорт",
             "amount": 569
         },
         {
             "id": 12,
             "amount": 50,
-            "category": "Transport",
+            "category": "Транспорт",
             "date": "13/10/2021"
         },
         {
             "id": 13,
             "amount": 34,
-            "category": "Education",
+            "category": "Развлечения",
             "date": "13/10/2021"
         }
     ],
