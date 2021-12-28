@@ -2,9 +2,7 @@
   <div class="content">
     <div class="links">
       <a class="regular" href="/add/Food?value=200">Добавить Еды = 200$</a>
-      <a class="regular" href="/add/Transport?value=50"
-        >Добавить Транспорт = 50$</a
-      >
+      <a class="regular" href="/add/Transport?value=50">Добавить Транспорт = 50$</a>
       <a class="regular" href="/add/Entertainment?value=2000"
         >Добавить Развлечения = 2000$</a
       >
@@ -20,11 +18,21 @@
     </div>
     <p v-if="this.isLoading">...Загружается</p>
     <div v-if="!this.isLoading">
-      <div class="payment" v-for="(item, idx) in paymentsList" :key="idx">
+      <div
+        class="payment"
+        v-for="(item, idx) in paymentsList[+page]"
+        :key="idx"
+      >
         <p>{{ item.id }}</p>
         <p>{{ item.date }}</p>
         <p>{{ item.category }}</p>
         <p>{{ item.amount }}$</p>
+        <div class="edit">
+          <button
+            class="edit-menu"
+            @click="onClickContextItem($event, item)"
+          ></button>
+        </div>
       </div>
     </div>
     <div class="pagination">
@@ -44,25 +52,67 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
+  name: "PaymentsDisplay",
+  components: {},
+  data() {
+    return {
+      isEditMenuOpen: Number,
+    };
+  },
   computed: {
     ...mapGetters({
       paymentsList: "getPaymentsList",
       pages: "getPagesNumber",
       isLoading: "getLoading",
+      page: "getPage",
     }),
     getTotalCosts() {
       return this.$store.getters.getFullPaymentValue;
     },
   },
   methods: {
-    ...mapMutations(["setCurrentPage"]),
+    ...mapMutations(["setCurrentPage", "setPage", "setEditItem"]),
     ...mapActions({
-      fetchListData: "fetchData",
+      fetchListData: "getPaymentListFromAPI",
+      deletePayment: "deletePayment",
     }),
     handleChangePage(e) {
-      const page = `${"page" + e.target.textContent}`.split(" ").join("");
-
-      this.fetchListData(page);
+      if (this.paymentsList[+e.target.textContent]) {
+        this.setPage(+e.target.textContent);
+      } else {
+        this.fetchListData(+e.target.textContent);
+      }
+    },
+    onClickContextItem(event, item) {
+      const items = [
+        {
+          text: "Edit",
+          action: () => {
+            console.log("edit", item);
+            this.actionEdit(item);
+          },
+        },
+        {
+          text: "Remove",
+          action: () => {
+            console.log(item.id);
+            this.actionDelete(item.id);
+          },
+        },
+      ];
+      this.$context.show({ event, items });
+    },
+    actionEdit(item) {
+      this.setEditItem(item);
+      this.$context.close();
+      this.$modal.show({
+        title: "Add Payment Form",
+        content: "AddPaymentForm",
+      });
+    },
+    actionDelete(id) {
+      this.deletePayment(id);
+      this.$context.close();
     },
   },
 };
@@ -75,7 +125,7 @@ export default {
 .payment {
   width: 490px;
   display: grid;
-  grid-template-columns: 40px repeat(3, 150px);
+  grid-template-columns: 40px repeat(3, 150px) 20px;
   grid-template-rows: auto;
   text-align: left;
   border-bottom: 1px solid lightgray;
@@ -103,6 +153,20 @@ export default {
   margin: 10px 0;
   &:hover {
     color: #008b8b;
+  }
+}
+.edit {
+  position: relative;
+}
+.edit-menu {
+  margin-left: -30px;
+  padding-top: 15px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  &:after {
+    content: "\FE19";
+    font-size: 20px;
   }
 }
 </style>

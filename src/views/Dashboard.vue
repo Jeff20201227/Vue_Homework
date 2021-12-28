@@ -1,31 +1,43 @@
 <template>
   <Layout>
-    <h1 class="heading">My Finance</h1>
-    <AddPaymentForm />
+    <h1 class="heading">Мои финансы</h1>
+    <Button title="Add Payment" @onClick="openModalPayment" width="300px" />
     <PaymentsDisplay />
   </Layout>
 </template>
 
 <script>
 import PaymentsDisplay from "@/components/entity/PaymentsDisplay";
-import AddPaymentForm from "@/components/entity/AddPaymentForm";
 import Layout from "@/components/Layout";
 import { mapActions } from "vuex";
+import Button from "@/components/ui/Button.vue";
 
 export default {
   name: "Dashboard",
   components: {
     PaymentsDisplay,
-    AddPaymentForm,
     Layout,
+    Button,
   },
   methods: {
     ...mapActions({
-      fetchListData: "fetchData",
+      fetchPaymentList: "getPaymentListFromAPI",
     }),
+    openModalPayment() {
+      this.$modal.show({
+        title: "Add Payment Form",
+        content: "AddPaymentForm",
+      });
+    },
   },
   created() {
-    this.fetchListData("page1");
+    this.fetchPaymentList(1);
+    if (this.$route.path.split("/")[1] === "add") {
+      this.$modal.show({
+        title: "Add Payment Form",
+        content: "AddPaymentForm",
+      });
+    }
   },
 };
 </script>
